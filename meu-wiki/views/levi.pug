@@ -10,3 +10,24 @@ block content
         p sobre sua classe: se localiza na posição atrás de Pedro da ordem de ataque, sendo classificado como fighter. Responsavel pelo maior dano da equipe, necessitando de menos estratégia.
       .col-md-6
         img.img-fluid.w-50.mx-auto.d-block(src='/images/levi.png' alt='Levi')
+
+  hr
+  h3 Comentários
+
+  if comments.length
+    ul
+      each comment in comments
+        li.mb-2
+          strong= comment.name + ':'
+          |  #{comment.text}
+          br
+          small.text-muted= new Date(comment.createdAt).toLocaleString()
+  else
+    p Parece que não há comentários por aqui. Que tal ser o primeiro?
+
+  form(action="/comments/levi" method="POST" class="mt-4")
+    .mb-3
+      input.form-control(type="text" name="name" placeholder="Seu nome" required)
+    .mb-3
+      textarea.form-control(name="text" rows="3" placeholder="Digite seu comentário" required)
+    button.btn.btn-primary(type="submit") Enviar comentário
